@@ -1,0 +1,46 @@
+[package]
+name = "bitmap_writer"
+version = "0.1.0"
+edition = "2024"
+authors = ["Sascha Klick <rustdev@sklick.de>"]
+license = "MIT"
+description = "Write a 1-bit/monocolor bitmap from a buffer to a buffer or terminal"
+readme = "README.md"
+homepage = "https://github.com/saschaklick/bitmap_writer"
+repository = "https://github.com/saschaklick/bitmap_writer"
+keywords = ["cli", "terminal", "graphics", "image", "bitmap"]
+categories = ["visualization", "command_line_utilities"]
+
+[features]
+std = ["io-streams"]
+
+[dependencies]
+io-streams = { version = "0.16.3", optional = true }
+
+[dev-dependencies]
+chrono = "0.4"
+
+[[example]]
+name="clock"
+features=["std"]
+required-features = ["std"]
+
+[[example]]
+name="bitmap"
+required-features = ["std"]
+
+[[example]]
+name="bitmap_unaligned"
+required-features = ["std"]
+
+[[example]]
+name="frames"
+required-features = ["std"]
+
+[[example]]
+name="ansi_position"
+required-features = ["std"]
+
+[[example]]
+name="ansi_reset"
+required-features = ["std"]
