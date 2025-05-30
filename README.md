@@ -2,8 +2,6 @@
 
 A utility library to convert monochrome bitmaps to textual representation.
 
-[![Crates.io][crates-badge]][crates-url]
-
 ## Usage
 
 To use `bitmap_writer`, first add this to your `Cargo.toml`:
