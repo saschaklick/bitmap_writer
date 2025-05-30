@@ -9,7 +9,7 @@ readme = "README.md"
 homepage = "https://github.com/saschaklick/bitmap_writer"
 repository = "https://github.com/saschaklick/bitmap_writer"
 keywords = ["cli", "terminal", "graphics", "image", "bitmap"]
-categories = ["visualization", "command_line_utilities"]
+categories = ["visualization", "command-line-interface"]
 
 [features]
 std = ["io-streams"]
