@@ -23,19 +23,19 @@ pub struct Writer {
 
 /// ```no_std``` compatible unless otherwise noted.
 impl Writer {
-    /// Construct a printer to write or print bitmaps later with defaults settings.
+    /// Construct a writer to write or print bitmaps later with defaults settings.
     /// 
-    /// The resulting printer instance can be chained for further configurations.
+    /// The resulting writer instance can be chained for further configurations.
     /// 
     /// ```
-    /// let p = bitmap_writer::Printer::new()
+    /// let p = bitmap_writer::Writer::new()
     ///     .style(bitmap_writer::Style::UnicodeBlock2x2)
-    ///     .be(true)
-    ///     ...
+    ///     /* ... */
+    ///    .be(true);
     /// ```
     ///    
     /// # Returns
-    /// - Printer instance
+    /// - Writer instance
     pub fn new() -> Writer {
         return Writer {
             _style: Style::UnicodeBlock1x2,
@@ -56,7 +56,7 @@ impl Writer {
     /// - `style`: See `bitmap_writer::Style`
     /// 
     /// # Returns
-    /// - Reference to printer.
+    /// - Reference to writer.
     pub fn style(&mut self, style: Style) -> &mut Self {
         self._style = style;        
         return self;
@@ -72,7 +72,7 @@ impl Writer {
     /// - `style`: See `bitmap_writer::Frame`    
     ///    
     /// # Returns
-    /// - Reference to printer.
+    /// - Reference to writer.
     pub fn frame(&mut self, frame: Frame) -> &mut Self {
         self._frame = frame;        
         return self;
@@ -91,17 +91,17 @@ impl Writer {
     /// - `column`: Column to set the terminal cursor to before writing the bitmap
     /// 
     /// # Returns
-    /// - Reference to printer.
+    /// - Reference to writer.
     pub fn ansi_position(&mut self, line: usize, column: usize) -> &mut Self {
         self._ansi_position = Some(AnsiPosition { line: line, column: column });
         return self;
     }
 
     /// Removes the line and column previously set by `ansi_position(..)`,
-    /// making the printer reuseable for non-ANSI use cases.
+    /// making the writer reuseable for non-ANSI use cases.
     /// 
     /// # Returns
-    /// - Reference to printer.
+    /// - Reference to writer.
     pub fn clear_ansi_position(&mut self) -> &mut Self {
         self._ansi_position = None;
         return self;
@@ -120,7 +120,7 @@ impl Writer {
     /// - `state`: Set to `true` to use ANSI save-and-restore.
     /// 
     /// # Returns
-    /// - Reference to printer.
+    /// - Reference to writer.
     pub fn ansi_position_restore(&mut self, state: bool) -> &mut Self {
         self._ansi_position_restore = state;        
         return self;
@@ -129,15 +129,15 @@ impl Writer {
     /// Whether to use big-endian or little-endian encoding when decoding
     /// the bytes of the bitmap.
     /// 
-    /// By default the printer used little-endian.
+    /// By default the writer used little-endian.
     /// 
     /// Little-endian encoding is used when defining bitmaps in source code:
     /// 
     /// ```
-    /// let pixels: [u8] = [
-    ///     0b100000000,
-    ///     0b110000000,
-    ///     0b111000000,
+    /// let pixels: &[u8] = &[
+    ///     0b10000000,
+    ///     0b11000000,
+    ///     0b11100000,
     /// ];
     /// ```
     /// 
@@ -145,13 +145,13 @@ impl Writer {
     /// or textures in VRAM mostly use big-endian.
     /// 
     /// Choosing the wrong endianess will result in 8-pixel wide mirrored
-    /// columns in the printer output.
+    /// columns in the writer output.
     /// 
     /// # Arguments
     /// - `state`: Set to `true` to use big-endian byte encoding.
     /// 
     /// # Returns
-    /// - Reference to printer.
+    /// - Reference to writer.
     pub fn be(&mut self, state: bool) -> &mut Self {
         self._use_be = state;        
         return self;
@@ -173,13 +173,13 @@ impl Writer {
     /// - `state`: Sets the byte-alignment of the bitmap.
     /// 
     /// # Returns
-    /// - Reference to printer.
+    /// - Reference to writer.
     pub fn byte_aligned(&mut self, state: bool) -> &mut Self {
         self._byte_aligned = state;        
         return self;
     }
 
-    /// After setting up the printer, finally convert the bitmap into a string of
+    /// After setting up the writer, finally convert the bitmap into a string of
     /// characters that can be printed out to terminal or transfered to a display
     /// device.
     /// 
@@ -321,7 +321,7 @@ use io_streams::StreamWriter;
 /// Requires `features=["std"]` in ```cargo.toml```.
 #[cfg(feature = "std")]
 impl Writer {
-    /// After setting up the printer, print the bitmap out to terminal.
+    /// After setting up the writer, print the bitmap out to terminal.
     /// 
     /// **stdout** or it's non-Linux equivalent is used for output.    
     /// 
