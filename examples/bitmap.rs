@@ -26,6 +26,6 @@ fn main() {
     println!("UnicodeBlock2x2");
     w.style(Style::UnicodeBlock2x2).print(&bitmap);    
     println!("UnicodeSextant2x3");
-    w.style(Style::UnicodeSectant2x3).print(&bitmap); 
+    w.style(Style::UnicodeSextant2x3).print(&bitmap); 
 }
 
