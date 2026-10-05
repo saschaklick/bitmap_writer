@@ -261,6 +261,9 @@ impl Writer {
             for x in (0..width).step_by(style.w) {
                 let mut block: usize = 0;
                 for yy in 0..style.h {
+                    if y + yy >= height {
+                        break;
+                    }
                     for xx in 0..style.w {
                         let w = if self._byte_aligned { (width + 7) / 8 * 8 } else { width };
                         let byte: usize = ((y + yy) * w + x + xx) / 8;
@@ -268,7 +271,7 @@ impl Writer {
                         if byte < bitmap.len() && bitmap[byte] & mask != 0 { block |= 1 << (yy * style.w + xx); }                                
                     }
                 }                                                     
-               let Ok(_v) = write!(w, "{}", if block < blocks.len() { blocks[block] } else if block < style.blocks.len() { style.blocks[block] } else { ' ' }) else { return };                       
+                let Ok(_v) = write!(w, "{}", if block < blocks.len() { blocks[block] } else if block < style.blocks.len() { style.blocks[block] } else { ' ' }) else { return };                       
             }
             
             match frame_ref {
