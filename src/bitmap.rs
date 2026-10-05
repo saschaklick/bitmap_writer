@@ -15,7 +15,7 @@ impl Bitmap <'_> {
     ///
     /// # Returns
     /// - Bitmap instance.
-    pub fn new(width: usize, height: usize, pixels: &[u8]) -> Bitmap {
+    pub fn new(width: usize, height: usize, pixels: &[u8]) -> Bitmap<'_> {
         return Bitmap { _w: width, _h: height, _pixels: pixels };
     }
 
