@@ -8,7 +8,7 @@ To use `bitmap_writer`, first add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-bitmap_writer = "0.1.1"
+bitmap_writer = "0.1.3"
 ```
 
 Next, add this to your crate:
